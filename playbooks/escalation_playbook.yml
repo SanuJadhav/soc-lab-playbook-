@@ -1,1 +1,31 @@
 # Escalation Playbook (SOAR / Splunk Phantom)
+# Escalation Playbook (SOAR / TheHive / Splunk Phantom)
+
+playbook:
+  name: "SOC Escalation Workflow"
+  description: "Automated escalation of detected incidents to Tier 2 analysts"
+  trigger:
+    source: "Wazuh Alert"
+    condition: "Critical severity OR IOC match"
+
+  actions:
+    - name: "Validate Alert"
+      tool: "Elastic Security"
+      description: "Confirm alert details and cross-check with threat intelligence feeds"
+
+    - name: "Block Attacker IP"
+      tool: "CrowdSec"
+      description: "Automatically block malicious IP at firewall level"
+
+    - name: "Escalate Case"
+      tool: "TheHive"
+      description: "Create case and assign to Tier 2 SOC analyst"
+
+    - name: "Preserve Evidence"
+      tool: "Velociraptor"
+      description: "Collect forensic artifacts and generate SHA-256 hashes"
+
+  outcome:
+    - "Incident escalated to Tier 2"
+    - "Attacker IP blocked"
+    - "Evidence preserved with integrity"
