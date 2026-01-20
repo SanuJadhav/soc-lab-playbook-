@@ -1,0 +1,18 @@
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+*.bak
+
+# Evidence dumps
+*.pcap
+*.csv
+*.json
+*.db
+*.sqlite
+*.mem
+*.dmp
+
+# OS junk
+.DS_Store
+Thumbs.db
